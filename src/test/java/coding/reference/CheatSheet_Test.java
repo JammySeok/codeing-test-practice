@@ -47,5 +47,4 @@ class CheatSheet_Test {
         cheatSheet.hashMapUsage();
         System.out.println();
     }
-
 }

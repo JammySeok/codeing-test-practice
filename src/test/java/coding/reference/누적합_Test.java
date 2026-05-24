@@ -13,7 +13,7 @@ class 누적합_Test {
         int left = 1;
         int right = 3;
 
-        int answer = ref.solution(arr, left, right);
+        int answer = ref.prefixSum(arr, left, right);
 
         System.out.println("answer = " + answer);
     }
@@ -24,7 +24,7 @@ class 누적합_Test {
         int left = 0;
         int right = 2;
 
-        int answer = ref.solution(arr, left, right);
+        int answer = ref.prefixSum(arr, left, right);
 
         System.out.println("answer = " + answer);
     }
@@ -35,7 +35,7 @@ class 누적합_Test {
         int left = 2;
         int right = 2;
 
-        int answer = ref.solution(arr, left, right);
+        int answer = ref.prefixSum(arr, left, right);
 
         System.out.println("answer = " + answer);
     }

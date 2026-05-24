@@ -7,7 +7,7 @@ package main.java.coding.reference;
  */
 public class 유클리드_호제법 {
 
-    public int[] solution(int a, int b) {
+    public int[] euclidean(int a, int b) {
         int num1 = a;
         int num2 = b;
 
@@ -17,8 +17,8 @@ public class 유클리드_호제법 {
             num2 = temp;
         }
 
-        int gcd = num1; // 최대공약수(gcd)
-        int lcm = (a*b) / gcd; // 최소공배수(lcm)
+        int gcd = num1;  // 최대공약수(gcd)
+        int lcm = (a*b) / gcd;  // 최소공배수(lcm)
 
         return new int[] {gcd, lcm};
     }

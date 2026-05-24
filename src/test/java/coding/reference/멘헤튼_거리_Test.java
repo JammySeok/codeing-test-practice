@@ -12,7 +12,7 @@ class 멘헤튼_거리_Test {
         int x1 = 1, y1 = 2;
         int x2 = 4, y2 = 6;
 
-        int answer = ref.solution(x1, y1, x2, y2);
+        int answer = ref.manhattan(x1, y1, x2, y2);
 
         System.out.println("answer = " + answer);
     }
@@ -22,7 +22,7 @@ class 멘헤튼_거리_Test {
         int x1 = 10, y1 = 5;
         int x2 = 20, y2 = 5;
 
-        int answer = ref.solution(x1, y1, x2, y2);
+        int answer = ref.manhattan(x1, y1, x2, y2);
 
         System.out.println("answer = " + answer);
     }
@@ -32,9 +32,8 @@ class 멘헤튼_거리_Test {
         int x1 = -2, y1 = -3;
         int x2 = 3, y2 = 2;
 
-        int answer = ref.solution(x1, y1, x2, y2);
+        int answer = ref.manhattan(x1, y1, x2, y2);
 
         System.out.println("answer = " + answer);
     }
-
 }

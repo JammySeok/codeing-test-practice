@@ -12,7 +12,7 @@ class 유클리드_호제법_Test {
         int a = 12;
         int b = 18;
 
-        int[] solution = ref.solution(a, b);
+        int[] solution = ref.euclidean(a, b);
 
         System.out.println("최대공약수(gcd): " + solution[0]);
         System.out.println("최소공배수(lcm): " + solution[1]);
@@ -23,7 +23,7 @@ class 유클리드_호제법_Test {
         int a = 100;
         int b = 25;
 
-        int[] solution = ref.solution(a, b);
+        int[] solution = ref.euclidean(a, b);
 
         System.out.println("최대공약수(gcd): " + solution[0]);
         System.out.println("최소공배수(lcm): " + solution[1]);
@@ -35,7 +35,7 @@ class 유클리드_호제법_Test {
         int a = 17;
         int b = 13;
 
-        int[] solution = ref.solution(a, b);
+        int[] solution = ref.euclidean(a, b);
 
         System.out.println("최대공약수(gcd): " + solution[0]);
         System.out.println("최소공배수(lcm): " + solution[1]);

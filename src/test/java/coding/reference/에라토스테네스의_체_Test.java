@@ -11,7 +11,7 @@ class 에라토스테네스의_체_Test {
     void 테스트1_bool() {
         int N = 10;
 
-        boolean[] answer = ref.solution1(N);
+        boolean[] answer = ref.eratosthenes(N);
 
         for(int i = 0; i < answer.length; i++) {
             System.out.println(i + " = " + answer[i]);
