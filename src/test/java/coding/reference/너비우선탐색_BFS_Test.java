@@ -194,7 +194,7 @@ class 너비우선탐색_BFS_Test {
         너비우선탐색_BFS.graph.get(3).add(4);
         너비우선탐색_BFS.graph.get(1).add(5);
 
-        // 1. 도달 가능한 목적지 테스트 (1번 노드 -> 4번 노드)
+        // 도달 가능한 목적지 테스트 (1번 노드 -> 4번 노드)
         // 1(시작거리1) -> 2(거리2) -> 3(거리3) -> 4(거리4) 이므로 4가 나와야 함
         int shortestPath = 너비우선탐색_BFS.bfsShortGraph(1, 4);
         assertEquals(4, shortestPath);
