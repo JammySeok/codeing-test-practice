@@ -16,6 +16,7 @@ public class Main {
          /**
           * [2단계] 다시 풀어볼 문제
           * - JadenCase 문자열만들기
+          * - 리코쳇 로봇
          */
     }
 }
