@@ -10,7 +10,7 @@ import java.util.List;
  * 생각해야 할 부분: "몇 번의 선택을 마치면(또는 어떤 상태가 되면) 탐색을 멈추고 결과를 반환해야 하지?"
  * 코드: 보통 함수의 맨 윗부분에 if (depth == 목표치) { ... return; } 형태로 작성
  *
- * [2단계] 현재 단계에서의 선택지" 나열하기: 지금 내가 할 수 있는 행동은?
+ * [2단계] 현재 단계에서의 선택지 나열하기: 지금 내가 할 수 있는 행동은?
  * 목표 지점까지 가기 위해, 현재 깊이(depth)에서 내가 고를 수 있는 선택지가 몇 개인지 파악
  * 생각해야 할 부분: "이번 턴에서 내가 할 수 있는 경우의 수는 뭐지?"
  * ex) O/X 고르기(2개), 1~9 숫자 중 하나 고르기(9개), 상하좌우 이동하기(4개) 등
@@ -18,7 +18,7 @@ import java.util.List;
  * [3단계] 선택지 실행 후, 다음 단계(depth + 1) 호출하기
  * 2단계에서 파악한 선택지들을 하나씩 실행해 보면서, 상태를 업데이트(depth + 1)하여 자기 자신 호출
  * 생각해야 할 부분: "이 선택을 한 상태로 다음 깊이(depth)로 넘어가기"
- * 코드: 선택지가 정해져 있다면 코드 여러 줄로 나열하고(순위 검색 문제 방식), 선택지가 많거나 유동적이라면 for문을 사용하여 재귀 함수를 호출
+ * 코드: 선택지가 정해져 있다면 코드 여러 줄로 나열하고, 선택지가 많거나 유동적이라면 for문을 사용하여 재귀 함수를 호출
  */
 public class 재귀_함수 {
 
@@ -65,7 +65,6 @@ public class 재귀_함수 {
      * 예시: 주어진 알파벳 중 중복 없이 N개를 뽑아 일렬로 나열하기
      */
     public void recursiveFunction3(String result, int depth, int targetDepth, char[] options, boolean[] visited, List<String> answerList) {
-
         // [1단계] 종료 조건: 목표 깊이에 도달하면 결과 저장 후 멈춤
         if (depth == targetDepth) {
             answerList.add(result);
@@ -74,7 +73,6 @@ public class 재귀_함수 {
 
         // [2단계] 현재 단계에서의 선택지 나열하기 (반복문 활용)
         for (int i = 0; i < options.length; i++) {
-
             // 이미 이전 depth에서 사용한 아이템(방문한 곳)이라면 건너뛰기
             if (visited[i]) continue;
 
@@ -98,7 +96,6 @@ public class 재귀_함수 {
         // [2단계 & 3단계] 하위 문제를 호출하고, 그 복귀작들을 결합(합산)하여 반환
         int leftResult = recursiveFunction4(n - 1);
         int rightResult = recursiveFunction4(n - 2);
-
         return leftResult + rightResult;
     }
 }
