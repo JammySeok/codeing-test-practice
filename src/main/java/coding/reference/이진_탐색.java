@@ -84,10 +84,10 @@ public class 이진_탐색 {
      * 파라메트릭 서치 (Parametric Search) 기본 템플릿
      * - 최적화 문제(최솟값/최댓값 구하기)를 결정 문제(T/F)로 바꾸어 풀 때 사용
      */
-    public long parametricSearch(int[] arr, long target) {
+    public int parametricSearch(int[] arr, long target) {
         long result = -1;
         long left = 1;
-        long right = 10000000000L; // 문제에서 주어진 최대값 범위
+        long right = 0;
 
         // 문제 조건에 따른 최댓값 탐색 (필요 시 상수로 대체 가능)
         for (int val : arr) {
@@ -106,7 +106,7 @@ public class 이진_탐색 {
             }
         }
 
-        return result;
+        return Math.toIntExact(result);
     }
 
     // 파라메트릭 서치용 조건 검증 메서드 (문제 따라 다름)
