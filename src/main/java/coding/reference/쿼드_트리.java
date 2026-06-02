@@ -6,7 +6,6 @@ package main.java.coding.reference;
  * ex) 2차원 배열/이미지 압축, 특정 영역 내 데이터 탐색, 대규모 맵의 충돌 감지 최적화, 화면 렌더링(LOD)
  */
 public class 쿼드_트리 {
-
     // 정답을 저장할 배열
     int[] answer;
 

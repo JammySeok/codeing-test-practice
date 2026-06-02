@@ -50,12 +50,11 @@ public class P72412_순위_검색 {
 
                 // 시작 - 끝 목표 값(targetScore) 비교하면서 절반 씩 줄이기
                 while (start < end) {
-                    // mid가 targetScore보다 작으면 절반 줄이기
-                    int mid = (start + end) / 2;
+                    int mid = (start + end) / 2;  // 중간 값 설정
 
-                    // mid가 targetScore보다 작으면 시작값(start) 중간으로 설정
+                    // mid가 targetScore보다 작으면 시작값(start) 중간(mid + 1)으로 설정
                     if (values.get(mid) < targetScore) start = mid + 1;
-                    // mid가 targetScore보다 크거나 같으면 끝값(end)을 중간으로 설정
+                    // mid가 targetScore보다 크거나 같으면 끝값(end)을 중간(mid)으로 설정
                     else end = mid;
                 }
 

@@ -20,10 +20,10 @@ public class P64062_징검다리_건너기 {
             // 건널 수 있는지 검사
             if (isValid(stones, mid, k)) {
                 result = mid;  // 현재 중간 값 result 세팅
-                left = mid + 1;  // 시작값(start) 중간으로 설정
+                left = mid + 1;  // 시작값(start) 중간(mid + 1)으로 설정
             }
             else {
-                right = mid - 1;  // 끝값(left) 중간으로 설정
+                right = mid - 1;  // 끝값(left) 중간(mid - 1)으로 설정
             }
         }
 
