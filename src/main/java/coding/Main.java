@@ -27,7 +27,6 @@ public class Main {
          * - 그리디 (Greedy)
          *
          * [알고리즘]
-         * - 다익스트라 (Dijkstra)
          * - 위상 정렬 (Topological Sort)
          * - 최소 신장 트리 (MST: Kruskal, Prim)
          * - 플로이드-워셜 (Floyd-Warshall)
