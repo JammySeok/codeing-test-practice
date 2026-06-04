@@ -13,19 +13,19 @@ import java.util.PriorityQueue;
 public class 다익스트라 {
 
     // 그래프의 간선 정보 및 격자 좌표를 표현하기 위한 클래스
-    public static class Node implements Comparable<Node> {
-        int targetVertex;  // 목적지 노드(그래프용)
-        int x, y;  // 2차원 격자형용 x, y 좌표
+    public static class Edge implements Comparable<Edge> {
+        int nextNode;  // 다음 노드(그래프용)
+        int x, y;  // x, y 좌표 (2차원 격자형용)
         int cost;  // 이동 비용(가중치)
 
         // 그래프용 생성자
-        public Node(int targetVertex, int cost) {
-            this.targetVertex = targetVertex;
+        public Edge(int nextNode, int cost) {
+            this.nextNode = nextNode;
             this.cost = cost;
         }
 
         // 2차원 격자용 생성자
-        public Node(int x, int y, int cost) {
+        public Edge(int x, int y, int cost) {
             this.x = x;
             this.y = y;
             this.cost = cost;
@@ -33,7 +33,7 @@ public class 다익스트라 {
 
         // 가중치(비용) 기준 오름차순
         @Override
-        public int compareTo(Node o) {
+        public int compareTo(Edge o) {
             return Integer.compare(this.cost, o.cost);
         }
     }
@@ -44,38 +44,38 @@ public class 다익스트라 {
      * @param graph: 그래프
      * @param start: 시작 노드 번호
      */
-    public int[] dijkstra(int v, List<List<Node>> graph, int start) {
+    public int[] dijkstra(int v, List<List<Edge>> graph, int start) {
         // 최단 거리 테이블 초기화
         int[] dist = new int[v + 1];  // 각 노드까지의 최단 거리를 저장할 배열
         Arrays.fill(dist, Integer.MAX_VALUE);  // 아직 방문하지 않은 곳은 전부 큰 값(Integer.MAX_VALUE)으로 설정
 
-        // 가중치가 가장 낮은 노드를 먼저 꺼내기 위한 우선순위 큐
-        PriorityQueue<Node> pq = new PriorityQueue<>();
+        // 가중치가 가장 작은 간선을 먼저 꺼내기 위한 우선순위 큐
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
 
-        // 시작 노드 설정
+        // 시작 간선 설정
         dist[start] = 0;  // 자기 자신으로 가는 거리는 0
-        pq.offer(new Node(start, 0));  // 시작 노드 정보를 큐에 삽입
+        pq.offer(new Edge(start, 0));  // 시작 간선 정보를 큐에 삽입
 
         while (!pq.isEmpty()) {
-            // 현재 누적 비용이 가장 적은 노드를 큐에서 꺼냄
-            Node current = pq.poll();
-            int currVertex = current.targetVertex;  // 현재 방문한 노드 번호
+            // 현재 비용이 가장 작은 간선을 큐에서 꺼냄
+            Edge current = pq.poll();
+            int currNode = current.nextNode;  // 현재 방문한 노드 번호
             int currCost = current.cost;  // 현재 칸까지 오는데 걸린 누적 비용
 
-            // 이미 처리된 적이 있는 노드라면 패스
-            if (dist[currVertex] < currCost) continue;
+            // 이미 처리된 적이 있는 간선이라면 패스
+            if (dist[currNode] < currCost) continue;
 
             // 현재 노드와 연결된 노드들 확인
-            for (Node neighbor : graph.get(currVertex)) {
-                int nextVertex = neighbor.targetVertex;  // 다음 노드 번호
+            for (Edge neighbor : graph.get(currNode)) {
+                int nextNode = neighbor.nextNode;  // 다음 노드 번호
 
                 // 비용 = 현재 노드까지 온 누적 비용(currCost) + 주변 노드로 가는 간선 비용(neighbor.cost)
                 int nextCost = currCost + neighbor.cost;
 
-                // 새로 계산한 비용(nextCost)이 기존에 기록되어 있던 거리(dist[nextVertex])보다 작다면
-                if (nextCost < dist[nextVertex]) {
-                    dist[nextVertex] = nextCost;  // 최단 거리 테이블 업데이트
-                    pq.offer(new Node(nextVertex, nextCost));  // 다음 탐색을 위해 큐에 삽입
+                // 새로 계산한 비용(nextCost)이 기존에 기록되어 있던 거리(dist[nextNode])보다 작다면
+                if (nextCost < dist[nextNode]) {
+                    dist[nextNode] = nextCost;  // 최단 거리로 수정
+                    pq.offer(new Edge(nextNode, nextCost));  // 다음 탐색을 위해 큐에 삽입
                 }
             }
         }
@@ -91,36 +91,36 @@ public class 다익스트라 {
      * @param start: 시작 노드 번호
      * @param target: 최종 목적지 노드 번호
      */
-    public int dijkstraTarget(int v, List<List<Node>> graph, int start, int target) {
+    public int dijkstraTarget(int v, List<List<Edge>> graph, int start, int target) {
         int[] dist = new int[v + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
 
-        PriorityQueue<Node> pq = new PriorityQueue<>();
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
         dist[start] = 0;
-        pq.offer(new Node(start, 0));
+        pq.offer(new Edge(start, 0));
 
         while (!pq.isEmpty()) {
-            Node current = pq.poll();
-            int currVertex = current.targetVertex;
+            Edge current = pq.poll();
+            int currNode = current.nextNode;
             int currCost = current.cost;
 
-            if (dist[currVertex] < currCost) continue;
+            if (dist[currNode] < currCost) continue;
 
-            // 큐에서 꺼낸 노드가 목표(target) 노드라면 누적 비용 반환
-            if (currVertex == target) return currCost;
+            // 큐에서 꺼낸 간선이 목표 노드(target)라면 누적 비용 반환
+            if (currNode == target) return currCost;
 
-            for (Node neighbor : graph.get(currVertex)) {
-                int nextVertex = neighbor.targetVertex;
+            for (Edge neighbor : graph.get(currNode)) {
+                int nextNode = neighbor.nextNode;
                 int nextCost = currCost + neighbor.cost;
 
-                if (nextCost < dist[nextVertex]) {
-                    dist[nextVertex] = nextCost;
-                    pq.offer(new Node(nextVertex, nextCost));
+                if (nextCost < dist[nextNode]) {
+                    dist[nextNode] = nextCost;
+                    pq.offer(new Edge(nextNode, nextCost));
                 }
             }
         }
 
-        // 만약 탐색이 끝날 때까지 target을 못 만났다면 도달 불가능한 노드 반환
+        // 만약 탐색이 끝날 때까지 target을 못 만났다면 최대값 반환
         return dist[target];  // Integer.MAX_VALUE
     }
 
@@ -144,15 +144,15 @@ public class 다익스트라 {
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
 
-        PriorityQueue<Node> pq = new PriorityQueue<>();
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
 
         // 시작점 (0, 0) 설정
         dist[0][0] = map[0][0];
-        pq.offer(new Node(0, 0, map[0][0]));
+        pq.offer(new Edge(0, 0, map[0][0]));
 
         while (!pq.isEmpty()) {
             // 현재까지 쌓인 누적 비용이 가장 적은 칸을 꺼냄
-            Node current = pq.poll();
+            Edge current = pq.poll();
             int cx = current.x;  // 현재 칸의 x 좌표
             int cy = current.y;  // 현재 칸의 y 좌표
             int currCost = current.cost;  // 현재 칸까지 오는데 걸린 누적 비용
@@ -176,7 +176,7 @@ public class 다익스트라 {
                     // 새로 계산한 비용(nextCost)이 기존 칸에 기록되어 있던 비용(dist[nx][ny])보다 작다면
                     if (nextCost < dist[nx][ny]) {
                         dist[nx][ny] = nextCost;  // 최단 거리 테이블 업데이트
-                        pq.offer(new Node(nx, ny, nextCost));  // 다음 탐색을 위해 큐에 삽입
+                        pq.offer(new Edge(nx, ny, nextCost));  // 다음 탐색을 위해 큐에 삽입
                     }
                 }
             }
