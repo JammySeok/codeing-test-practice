@@ -21,12 +21,7 @@ public class Main {
          */
 
         /**
-         * 정리 해야 될 것
-         * [방법론]
-         * - DP (Dynamic Programming)
-         * - 그리디 (Greedy)
-         *
-         * [알고리즘]
+         * [공부] 정리 해야 될 알고리즘
          * - 위상 정렬 (Topological Sort)
          * - 최소 신장 트리 (MST: Kruskal, Prim)
          * - 플로이드-워셜 (Floyd-Warshall)
