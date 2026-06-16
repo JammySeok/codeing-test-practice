@@ -1,6 +1,8 @@
 package main.java.coding.reference;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 
 /**
  * 투 포인터 (Two Pointers)
@@ -77,5 +79,69 @@ public class 투_포인터 {
 
         // target을 만족하는 구간을 찾지 못했다면 0 반환, 찾았다면 최소 길이 반환
         return minLength == Integer.MAX_VALUE ? 0 : minLength;
+    }
+
+    // 2차원 고정 크기 슬라이딩 윈도우
+    // M x N 크기의 2차원 배열에서 H x W 크기의 윈도우를 이동시키며 구간의 최댓값(또는 최솟값)을 구하는 기법
+    public int[][] fixedSize2DWindowMax(int[][] matrix, int h, int w) {
+        int m = matrix.length;  // 세로 크기 (행의 개수)
+        int n = matrix[0].length;  // 가로 크기 (열의 개수)
+
+        // 가로(행) 방향 슬라이딩 윈도우
+        // 각 행(i)마다 너비 w 구간의 최댓값을 구함
+        int[][] rowMax = new int[m][n - w + 1];
+        for (int i = 0; i < m; i++) {
+            Deque<Integer> deque = new ArrayDeque<>();  // 인덱스(j) 저장
+
+            for (int j = 0; j < n; j++) {
+                // 범위를 벗어난 만료된 인덱스 제거
+                if (!deque.isEmpty() && deque.peekFirst() <= j - w) {
+                    deque.pollFirst();
+                }
+
+                // 새로 들어온 값(matrix[i][j]) 보다 작거나 같으면 빼기 (최대값 맨 앞)
+                while (!deque.isEmpty() && matrix[i][deque.peekLast()] <= matrix[i][j]) {
+                    deque.pollLast();
+                }
+
+                // 현재 인덱스 큐에 추가
+                deque.offerLast(j);
+
+                // 창문이 차면 결과 배열에 기록
+                if (j >= w - 1) {
+                    rowMax[i][j - w + 1] = matrix[i][deque.peekFirst()];
+                }
+            }
+        }
+
+        // 세로(열) 방향 슬라이딩 윈도우
+        // rowMax을 바탕으로 각 열(j)마다 높이 h 구간의 최댓값을 구함
+        int[][] finalMax = new int[m - h + 1][n - w + 1];
+        for (int j = 0; j < n - w + 1; j++) {
+            Deque<Integer> deque = new ArrayDeque<>();  // 인덱스(i) 저장
+
+            for (int i = 0; i < m; i++) {
+                // 범위를 벗어난 만료된 인덱스 제거
+                if (!deque.isEmpty() && deque.peekFirst() <= i - h) {
+                    deque.pollFirst();
+                }
+
+                // 새로 들어온 값(rowMax[i][j]) 보다 작거나 같으면 빼기 (최대값 맨 앞)
+                while (!deque.isEmpty() && rowMax[deque.peekLast()][j] <= rowMax[i][j]) {
+                    deque.pollLast();
+                }
+
+                // 현재 인덱스 큐에 추가
+                deque.offerLast(i);
+
+                // 창문이 가득 차면 최종 배열에 기록
+                if (i >= h - 1) {
+                    finalMax[i - h + 1][j] = rowMax[deque.peekFirst()][j];
+                }
+            }
+        }
+
+        // 각 H x W 구간별 최댓값이 기록된 배열 반환
+        return finalMax;
     }
 }

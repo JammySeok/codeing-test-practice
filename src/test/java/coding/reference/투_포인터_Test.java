@@ -4,6 +4,8 @@ import main.java.coding.reference.투_포인터;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 class 투_포인터_Test {
 
     투_포인터 ref = new 투_포인터();
@@ -84,5 +86,43 @@ class 투_포인터_Test {
 
         Assertions.assertEquals(result, answer);
         System.out.println("answer = " + answer);
+    }
+
+    @Test
+    void 테스트1_fixedSize2DWindowMax() {
+        // 3x4 배열에서 2x2 구간의 최댓값 찾기
+        int[][] matrix = {
+                {1, 5, 2, 3},
+                {4, 2, 8, 1},
+                {7, 6, 5, 4}
+        };
+        int h = 2, w = 2;
+        int[][] result = {
+                {5, 8, 8},
+                {7, 8, 8}
+        };
+
+        int[][] answer = ref.fixedSize2DWindowMax(matrix, h, w);
+
+        Assertions.assertTrue(Arrays.deepEquals(result, answer));
+        System.out.println("answer = " + Arrays.deepToString(answer));
+    }
+
+    @Test
+    void 테스트2_fixedSize2DWindowMax() {
+        // 배열 크기와 창문 크기가 완전히 동일한 경우 (전체 최댓값 1개만 나와야 함)
+        int[][] matrix = {
+                {10, 20, 30},
+                {40, 99, 10}
+        };
+        int h = 2, w = 3;
+        int[][] result = {
+                {99}
+        };
+
+        int[][] answer = ref.fixedSize2DWindowMax(matrix, h, w);
+
+        Assertions.assertTrue(Arrays.deepEquals(result, answer));
+        System.out.println("answer = " + Arrays.deepToString(answer));
     }
 }
